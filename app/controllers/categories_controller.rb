@@ -10,6 +10,7 @@ class CategoriesController < ApplicationController
 
   def show
     @category = Category.find(params[:id])
+    @bookmark = Bookmark.new
   end
 
   def create
