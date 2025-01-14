@@ -1,0 +1,67 @@
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 16px;
+}
+
+.card-category {
+  background-size: cover;
+  background-position: center;
+  height: 180px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  font-family: "Bebas Neue";
+  text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+
+  h2 {
+    font-size: 20px;
+  }
+
+}
+
+.card-recipe {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  background: white;
+
+  h3 {
+    font-family: "Bebas Neue";
+    font-size: 25px;
+  }
+
+  p {
+    font-family: "Montserrat";
+  }
+
+  img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+.card-recipe-description {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}
+
+.card-recipe-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 10px;
+}

@@ -1,7 +1,37 @@
-<h1>Category: <%= @category.name %></h1>
-  <% @category.bookmarks.each do |bookmark|  %>
-  <p><strong><%= bookmark.recipe.name %></strong> | <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bookmark.recipe.name} from your #{@category.name} category?"} %></p>
-  <p><%= bookmark.recipe.description %></p>
-  <% end %>
+<div class="banner" style="background-image: url('<%= asset_path "#{@category.name.downcase}.jpg" %>'), linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3))">
+  <h1 class="bg-warning p-1 mb-0 pb-0"><%= @category.name %></h1>
+</div>
 
-<%= link_to "Back to all categories", categories_path %>
+<div class="container">
+
+  <div class="d-flex align-items-center justify-content-between m-3">
+    <h1 class="mt-3">Recipes</h1>
+    <%= link_to "Add a recipe", new_category_path, class: "btn btn-primary text-white" %>
+  </div>
+
+  <div class="cards">
+    <% @category.bookmarks.each do |bookmark|  %>
+        <div class="card-recipe">
+          <%= image_tag bookmark.recipe.image_url, alt: "recipe image" %>
+          <div class="card-recipe-title">
+            <h3><%= bookmark.recipe.name %></strong> | <%= link_to "Delete", bookmark_path(bookmark), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove #{bookmark.recipe.name} from your #{@category.name} category?"} %></h3>
+          </div>
+
+          <p class="p-2"><%= bookmark.recipe.description %></p>
+
+          <div class="card-recipe-description">
+            <p><strong>"  <%= bookmark.comment %></strong></p>
+            <p><strong><%= bookmark.recipe.rating %> </strong> <%= '⭐️' * bookmark.recipe.rating %>
+          </div>
+        </div>
+        <% end %>
+  </div>
+
+<div class="bg-white border-bottom padding"></div>
+  <div class="d-flex flex-row justify-content-between p-1 py-2">
+    <%= link_to "Back to all categories", categories_path %>
+    </div>
+  </div>
+</div>
+
+</div>

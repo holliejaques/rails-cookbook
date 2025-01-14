@@ -12,5 +12,5 @@ Rails.application.routes.draw do
   resources :categories, except: [:edit, :update, :destory] do
     resources :bookmarks, only: [:new, :create]
   end
-  resources :bookmarks, only: [:destroy]
+  resources :bookmarks, only: [:destroy] # because to destroy a bookmark it is independent as we don't need to know the category so it doesn't need to be nested
 end
