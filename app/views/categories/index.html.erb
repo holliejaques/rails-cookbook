@@ -12,7 +12,9 @@
 
   <div class="cards">
     <% @categories.each do |category| %>
-        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path category.photo.key, height: 300, crop: :fill %>')">
+    <% if category.photo.attached?  %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url('<%= cl_image_path category.photo.key, width: 400, height: 300, crop: :fill %>')">
+    <% end %>
           <h1><%= link_to category.name, category_path(category), class:"text-decoration-none text-white" %></h1>
           <h2><%= category.recipes.count %> recipes </h2>
         </div>
