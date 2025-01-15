@@ -8,11 +8,43 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+require 'open-uri' # reads an api
+require 'json' # formats everything correctly
+
 puts 'Cleaning database...'
 
+Bookmark.destroy_all
 Recipe.destroy_all
 
 puts 'Creating recipes...'
+
+url = 'https://www.themealdb.com/api/json/v1/1/filter.php?c=seafood'
+
+# The API will return a list
+recipe = URI.parse(url).read
+meals = JSON.parse(recipe)
+
+# Define a new method
+def recipe_builder(recipe_id)
+  # inside method, api call to, give the api the id
+  recipe_url = "https://www.themealdb.com/api/json/v1/1/lookup.php?i=#{recipe_id}"
+  recipe_json_data = URI.parse(recipe_url).read
+  recipe_info = JSON.parse(recipe_json_data)
+  # create new recipe instances with info we get back
+  # recipe_builder method should then create a new recipe instance using the data from the response
+  name = recipe_info['meals'][0]['strMeal']
+  description = recipe_info['meals'][0]['strInstructions']
+  image_url = recipe_info['meals'][0]['strMealThumb']
+  Recipe.create!(name: name, description: description, image_url: image_url, rating: rand(0..10))
+end
+
+meals['meals'].each do |recipe|
+  recipe_id = recipe['idMeal']
+  # call method recipe_builder & pass id
+  recipe_builder(recipe_id)
+end
+
+puts 'Created Seafood Recipes'
 
 Recipe.create!(
   name: 'Beef Ramen',
